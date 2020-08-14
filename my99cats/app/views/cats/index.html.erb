@@ -1,0 +1,9 @@
+<h1> I got 99 cats, and a female dog ;) ain't one</h1>
+
+<ul>
+    <% @cats.each do |kat| %>
+    <li>
+        <a href="<%= cat_url(kat) %>" > <%= kat.name %> </a>
+    </li>
+    <% end %>
+</ul>

@@ -1,0 +1,52 @@
+<%if edit%>
+    <%action = cat_url(cat)%>
+    <%button = "Makeover Time!"%>
+<%else%>
+    <%action = cats_url%>
+    <%button = "Create A Cat"%>
+<%end%>
+
+<form action= "<%= action %>" method = "post">
+
+    <%if edit%>
+        <input type="hidden" name="_method" value="PATCH">
+    <%end%>
+
+    <label for="name">Name: </label><br>
+    <input type="text" id="name" name="cat[name]" value="<%= cat.name %>">
+
+    <br><br>
+
+    <label for="birth_date">Birth date: </label><br>
+    <input type="date" id="birth_date" name="cat[birth_date]" value="<%= cat.birth_date %>">
+
+    <br><br>
+
+    <label for="color">Color: </label><br>
+    <select name="cat[color]">
+        <%selected = edit ? "" : selected%>
+        <option <%=selected%> disabled>--Select Color--</option>
+        <% colors.each do |color|%>
+            <% edit ? (selected = cat.color == color ? "selected" : "") : selected=""%>
+            <option <%=selected%> value="<%=color%>"> <%=color%> </option>
+        <%end%>
+    </select>
+    <br><br>
+
+    <label for="sex">Sex: </label><br>
+    <input type="text" id="sex" name="cat[sex]" value="<%= cat.sex %>">
+    <!--logic for whether chekced or not, trying to add radio buttons
+    <input type="radio" id="sex" name="cat[sex]" value="M" <%#=checked%>>
+    <label for="male">Male</label>
+    <input type="radio" id="sex" name="cat[sex]" value="F" <%#=checked%>>
+    <label for="female">Female</label> -->
+
+    <br><br>
+
+    <label for="description">Description: </label><br>
+    <textarea id ="description" name="cat[description]"><%= cat.description %> </textarea>
+
+    <br>
+    <input type="submit" value=<%=button%>>
+
+</form>
